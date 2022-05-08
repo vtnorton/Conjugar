@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "ConjugarApp (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "ConjugarApp (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
