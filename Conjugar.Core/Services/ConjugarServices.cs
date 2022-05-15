@@ -63,7 +63,6 @@ namespace Conjugar.Core.Services
 
             return ConjugacaoVerboRegular(verbo);
         }
-
         public Verbo ConjugacaoVerboIrregular(string infinitivo)
         {
             var verbo = new Verbo
@@ -78,13 +77,9 @@ namespace Conjugar.Core.Services
         // TODO: Fazer testes
         public Verbo ConjugacaoVerboRegular(string infinitivo)
         {
-            var verbo = new Verbo
-            {
-                TipoDeVerbo = TipoDeVerbo.Regular,
-                Infinitivo = infinitivo.FirstCharToUpper(),
-            };
+            var verbo = CriarPropriedades(infinitivo);
 
-            switch (DefinirConjugacao(infinitivo))
+            switch (verbo.Conjugacao)
             {
                 case Conjugacao.PrimeiraConjugacao:
                     return ConjugarPrimeiraConjugacao(verbo);
@@ -97,6 +92,34 @@ namespace Conjugar.Core.Services
             return verbo;
         }
 
+        // TODO: Testes
+        public Verbo CriarPropriedades(string infinitivo)
+        {
+            var tipoConjugacao = DefinirConjugacao(infinitivo);
+            var vogalTematica = string.Empty;
+
+            switch (tipoConjugacao) { 
+                case Conjugacao.PrimeiraConjugacao:
+                    vogalTematica = "a";
+                    break;
+                case Conjugacao.SegundaConjugacao:
+                    vogalTematica = "e";
+                    break;
+                case Conjugacao.TerceriaConjugacao:
+                    vogalTematica = "i";
+                    break;
+            }
+
+            return new Verbo
+            {
+                TipoDeVerbo = TipoDeVerbo.Regular,
+                Infinitivo = infinitivo.FirstCharToUpper(),
+                Conjugacao = tipoConjugacao,
+                VogalTematica = vogalTematica,
+                Radical = infinitivo.Substring(0, infinitivo.Length - 2),
+            };
+        }
+        
         public Verbo ConjugarPrimeiraConjugacao(Verbo verbo)
         {
             /*

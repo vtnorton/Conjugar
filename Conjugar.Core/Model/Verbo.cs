@@ -11,6 +11,7 @@ namespace Conjugar.Core.Model
         public string Gerundio { get; set; }
         public string ParticipioPassado { get; set; }
         public TipoDeVerbo TipoDeVerbo { get; set; }
+        public Conjugacao Conjugacao { get; set; }
 
         public List<Conjugacoes> Conjugacoes { get; set; }
     }
